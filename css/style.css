@@ -57,3 +57,8 @@ body {
     border-color: #a39ae7;
     box-shadow: 0 0 2px 0 #39357d;
 }
+
+.red {
+    color: red;
+    border: 1px solid red;
+}
