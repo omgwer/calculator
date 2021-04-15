@@ -5,6 +5,7 @@ let selectorOperation = false;
 let firstOperand  = '';
 let secondOperand = '';
 let operand = '0';
+
 function updateDisplay(info){
   calcDisplay.textContent += info;
 }
@@ -15,38 +16,38 @@ function clearDisplay(){
 }
 
 function getResult(res) {
-  //let result = eval(res).toFixed(3);
   calcDisplay.textContent += ' = ' + result;
   selectorOperation = true;
 }
 
 function numberSelector(selector) {
-  if (selector == '+' ||
-    selector == '-' ||
-    selector == '*' ||
-    selector == '/') {
+  if (selector === '+' ||
+    selector === '-' ||
+    selector === '*' ||
+    selector === '/') {
     operand = selector;
-
-  } else {
-    if (operand !== '0') {
-      secondOperand += selector;
-    } else {
-      firstOperand += selector;
-    }
+    return;
   }
+  if (operand !== '0') {
+    secondOperand += selector;
+    return;
+  }
+  firstOperand += selector;
+
+
 }
 function result() {
   let a = 0;
-  if (operand == '-') {
+  if (operand === '-') {
     a =  firstOperand - secondOperand;
   }
-  if (operand == '+') {
+  if (operand === '+') {
     a = -(-firstOperand - secondOperand);
   }
-  if (operand == '/') {
+  if (operand === '/') {
     a = firstOperand / secondOperand;
   }
-  if (operand == '*') {
+  if (operand === '*') {
     a = firstOperand * secondOperand;
   }
   firstOperand = '';
@@ -63,19 +64,16 @@ for (let i = 0; i < calcButton.length; i++) {
             selectorOperation = false;
             res = [];
           }
-          if (calcButton[i].textContent == '=') {
-            calcDisplay.textContent = result();
+          if (calcButton[i].textContent === '=') {
+            calcDisplay.textContent = result().toFixed(3);
             selectorOperation = true;
-          } else {
+            return;
+          }
             numberSelector(calcButton[i].textContent);
             updateDisplay(calcButton[i].textContent);
             console.log(firstOperand);
             console.log(secondOperand);
             console.log(operand);
-
-
-          }
-
         });
 }
 
