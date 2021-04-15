@@ -1,23 +1,22 @@
 let calcDisplay = document.querySelector('.calculator_display');
-let calcButtons = document.querySelector('.calculator_buttons');
 let calcButton = document.querySelectorAll('.calculator_button');
 let selectorOperation = false;
 let firstOperand  = '';
 let secondOperand = '';
 let operand = '0';
 
+function numberCleaner() {
+  firstOperand  = '';
+  secondOperand = '';
+  operand = '0';
+}
+
 function updateDisplay(info){
   calcDisplay.textContent += info;
 }
 
-function clearDisplay(){
+function displayCleaner(){
   calcDisplay.textContent = '';
-
-}
-
-function getResult(res) {
-  calcDisplay.textContent += ' = ' + result;
-  selectorOperation = true;
 }
 
 function numberSelector(selector) {
@@ -27,6 +26,11 @@ function numberSelector(selector) {
     selector === '/') {
     operand = selector;
     return;
+  }
+  if (selector === 'On/c') {
+    numberCleaner();
+    displayCleaner();
+    return '';
   }
   if (operand !== '0') {
     secondOperand += selector;
@@ -45,14 +49,18 @@ function result() {
     a = -(-firstOperand - secondOperand);
   }
   if (operand === '/') {
+    if (secondOperand === '0') {
+      numberCleaner();
+      return 'ERROR' ;
+    } else {
     a = firstOperand / secondOperand;
+    }
   }
   if (operand === '*') {
     a = firstOperand * secondOperand;
   }
-  firstOperand = '';
-  secondOperand = '';
-  operand = '0';
+
+  numberCleaner();
   return a;
 
 }
@@ -60,20 +68,20 @@ function result() {
 for (let i = 0; i < calcButton.length; i++) {
         calcButton[i].addEventListener('click', function () {
           if (selectorOperation) {
-            clearDisplay();
+            displayCleaner();
             selectorOperation = false;
-            res = [];
+
           }
           if (calcButton[i].textContent === '=') {
-            calcDisplay.textContent = result().toFixed(3);
+            calcDisplay.textContent = result();
             selectorOperation = true;
             return;
           }
-            numberSelector(calcButton[i].textContent);
-            updateDisplay(calcButton[i].textContent);
-            console.log(firstOperand);
-            console.log(secondOperand);
-            console.log(operand);
+          updateDisplay(calcButton[i].textContent);
+          numberSelector(calcButton[i].textContent);
+          console.log(firstOperand);
+          console.log(secondOperand);
+          console.log(operand);
         });
 }
 
