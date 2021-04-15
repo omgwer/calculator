@@ -36,18 +36,24 @@ function numberSelector(selector) {
   }
 }
 function result() {
+  let a = 0;
   if (operand == '-') {
-    return  firstOperand - secondOperand;
+    a =  firstOperand - secondOperand;
   }
   if (operand == '+') {
-    return -(-firstOperand - secondOperand);
+    a = -(-firstOperand - secondOperand);
   }
   if (operand == '/') {
-    return firstOperand / secondOperand;
+    a = firstOperand / secondOperand;
   }
   if (operand == '*') {
-    return firstOperand * secondOperand;
+    a = firstOperand * secondOperand;
   }
+  firstOperand = '';
+  secondOperand = '';
+  operand = '0';
+  return a;
+
 }
 
 for (let i = 0; i < calcButton.length; i++) {
@@ -59,6 +65,7 @@ for (let i = 0; i < calcButton.length; i++) {
           }
           if (calcButton[i].textContent == '=') {
             calcDisplay.textContent = result();
+            selectorOperation = true;
           } else {
             numberSelector(calcButton[i].textContent);
             updateDisplay(calcButton[i].textContent);
