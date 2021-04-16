@@ -87,11 +87,14 @@ body {
     }
     .calculator_buttons {
         grid-template-columns: repeat(5, 146px);
-        grid-template-rows: repeat(4, 210px);
+        grid-template-rows: repeat(4, 220px);
         grid-gap: 15px;
         margin-left: 40px;
         margin-top: 50px;
 
-    }
 
+    }
+    .calculator_button {
+        font: 42px/220px 'Zen Dots', cursive;
+    }
 }
