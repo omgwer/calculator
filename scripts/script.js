@@ -68,6 +68,10 @@ function result() {
     a = firstOperand * secondOperand;
   }
   numberCleaner();
+  if (a.toFixed(3) == Math.trunc(a)) {
+    return a;
+
+  }
   if (a.toFixed(3).toString().length > 15)  {
     numberCleaner();
     return 'ERROR' ;
