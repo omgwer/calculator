@@ -78,6 +78,7 @@ function result() {
   }
   return a.toFixed(3);
 
+
 }
 
 for (let i = 0; i < calcButton.length; i++) {
