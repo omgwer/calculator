@@ -44,8 +44,6 @@ function numberSelector(selector) {
     return;
   }
   firstOperand += selector;
-
-
 }
 
 function result() {
